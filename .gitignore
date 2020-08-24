@@ -1,0 +1,8 @@
+.vscode
+**/obj/**
+**/bin/**
+ConfigChangerGo/__debug_bin
+ConfigChangerGo/configchangergo.exe
+ConfigChangerGo/configchangergo
+**/config/**
+

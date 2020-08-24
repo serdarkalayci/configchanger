@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+WORKDIR /app
+
+COPY . ./
+RUN dotnet restore 
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+WORKDIR /app
+ENV TZ=Europe/Istanbul
+ENV ASPNETCORE_URLS=http://+:5100
+EXPOSE 5100
+COPY --from=build-env /app/out .
+
+ENTRYPOINT ["dotnet", "ConfigChangerNet.dll"]
