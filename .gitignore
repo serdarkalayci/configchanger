@@ -4,5 +4,6 @@
 ConfigChangerGo/__debug_bin
 ConfigChangerGo/configchangergo.exe
 ConfigChangerGo/configchangergo
-**/config/**
+ConfigChangerGo/**/config/**
+ConfigChangerNet/**/config/**
 
