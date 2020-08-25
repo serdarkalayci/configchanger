@@ -2,6 +2,7 @@ package configuration
 
 import (
 	"os"
+	"path"
 
 	"github.com/rs/zerolog"
 
@@ -15,12 +16,14 @@ const logLevel = "Logging.LogLevel.Default"
 
 // SetConfigValues gets configuration values from the file and injects them
 func SetConfigValues() {
-	viper.SetConfigFile(pathToConfig)
+	currentPath, _ := os.Getwd()
+	fullPath := path.Join(currentPath, pathToConfig)
+	viper.SetConfigFile(fullPath)
 	viper.SetConfigType("json")
 	err := viper.ReadInConfig() // Find and read the config file
 	// just use the default value(s) if the config file was not found
 	if _, ok := err.(*os.PathError); ok {
-		log.Warn().Msgf("No config file '%s' not found. Using default values", pathToConfig)
+		log.Warn().Msgf("No config file '%s' not found. Using default values", fullPath)
 	} else if err != nil { // Handle other errors that occurred while reading the config file
 		log.Err(err).Msgf("Error while reading the config file")
 	}
