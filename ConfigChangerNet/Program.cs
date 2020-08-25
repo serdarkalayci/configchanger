@@ -22,7 +22,7 @@ namespace ConfigChangerNet
                 .ConfigureAppConfiguration(c =>
                 {
                 string path = Directory.GetCurrentDirectory();
-                c.AddJsonFile(Path.Combine(path, "config/livesettings.json"), optional: true, reloadOnChange: true);
+                c.AddJsonFile(ConfigMapFileProvider.FromRelativePath("config"), "livesettings.json", optional: true, reloadOnChange: true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
